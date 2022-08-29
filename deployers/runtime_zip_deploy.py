@@ -7,6 +7,8 @@ def deploy(conanfile, output_folder, **kwargs):
     for r, d in conanfile.dependencies.items():
         # look for .dlls and .exes in the bin folder
         bindir = os.path.join(d.package_folder, "bin")
+        if not os.path.isdir(bindir):
+            continue
         for f in os.listdir(bindir):
             if f.endswith(".dll") or f.endswith(".exe"):
                 dst = os.path.join(output_folder, f)

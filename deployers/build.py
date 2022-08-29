@@ -40,3 +40,9 @@ run("conan install --requires=zlib/1.2.11 --build=missing --deploy=full_deploy -
 # Adding a new version works
 run("conan install --requires=zlib/1.2.11 --build=missing --deploy=full_deploy -of=full_deploy -g CMakeDeps")
 
+
+# Custom one:
+run("conan install --requires=zlib/1.2.12 --tool-requires=cmake/3.19.8 -o zlib*:shared=True --deploy=runtime_zip_deploy --build=missing -of=runtime_deploy")
+
+# It will work with "conan config install"
+
