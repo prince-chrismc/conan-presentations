@@ -1,5 +1,5 @@
 from conan import ConanFile
 
-class PkgA(ConanFile):
-    name = "pkga"
+class Engine(ConanFile):
+    name = "engine"
     version = "0.1"

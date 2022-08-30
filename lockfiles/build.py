@@ -18,9 +18,5 @@ def chdir(d):
     os.chdir(cwd)
 
 
-run("conan config install config")
-
-run("conan -h")
-run("conan jfrog:hello")
-run("conan jfrog:hello --format=json")
-run("conan jfrog:multi-export repo --format=json")
+run("conan create math --version=1.0")
+run("conan create engine")

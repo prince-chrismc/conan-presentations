@@ -1,7 +1,6 @@
 import os
 import json
 
-from conan.api.conan_api import ConanAPIV2
 from conan.api.output import ConanOutput
 from conan.cli.command import conan_command
 
@@ -10,7 +9,7 @@ def output_json(exported):
 
 
 @conan_command(group="My own commands", formatters={"json": output_json})
-def multi_export(conan_api: ConanAPIV2, parser, *args):
+def multi_export(conan_api, parser, *args):
     """
     Exporting several recipes
     """
