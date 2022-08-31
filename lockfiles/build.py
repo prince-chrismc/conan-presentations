@@ -24,13 +24,20 @@ def chdir(d):
 # basic usage of a lockfile
 run("conan remove * -f")
 run("conan create math --version=1.0")
-run("conan install engine")
-run("conan create math --version=1.1")
-run("conan install engine")
-run("conan install engine --lockfile-out=conan.lock")
-print(load("conan.lock"))
-run("conan create math --version=1.2")
-run("conan install engine --lockfile=conan.lock")
+run("conan create engine --version=1.0")
 
-# incremental, partial lockfile?
-# multi-configuration lockfile?
+# partial lockfile to create a new lockfile
+run("conan install game")
+run("conan create math --version=1.1")
+run("conan install game")
+# oppss
+run("conan install game --lockfile-out=game.lock")
+print(load("game.lock"))
+
+run("conan create math --version=1.2")
+run("conan install game --lockfile=game.lock")  # All good, still 1.1
+
+# create a new version of engine, modifying lockfile
+run("conan create engine --version=1.1 --lockfile=game.lock --lockfile-out=new_engine.lock")
+print(load("new_engine.lock"))
+run("conan install game --lockfile=new_engine.lock")
