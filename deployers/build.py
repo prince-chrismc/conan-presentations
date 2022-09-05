@@ -30,15 +30,10 @@ except:
     pass
 
 # run("conan search * -r=conanv2")
-run("conan install --requires=zlib/1.2.12 --tool-requires=cmake/3.19.8 --build=missing --deploy=full_deploy -of=full_deploy")
-# The path is pointing to the local deployment
-run(".\\full_deploy\\conanbuild.bat && cmake --version")
-# Should be 3.19.8
-# Adding a new version works
+run("conan install --requires=zlib/1.2.12 --requires=fmt/9.0.0 --build=missing --deploy=full_deploy -of=full_deploy")
+run("conan install --requires=zlib/1.2.12 --requires=fmt/9.0.0 --build=missing --deploy=full_deploy -of=full_deploy -g CMakeDeps")
 run("conan install --requires=zlib/1.2.11 --build=missing --deploy=full_deploy -of=full_deploy")
-# The path of CMakeDeps also pointing to local deploy
-# Adding a new version works
-run("conan install --requires=zlib/1.2.11 --build=missing --deploy=full_deploy -of=full_deploy -g CMakeDeps")
+run("conan install --tool-requires=cmake/3.19.8 --build=missing --deploy=full_deploy -of=full_deploy")
 
 
 # Custom one:
