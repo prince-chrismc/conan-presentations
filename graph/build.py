@@ -23,6 +23,10 @@ def chdir(d):
 
 run("conan create math --build=missing")
 run("conan create engine --build=missing")
+run("conan create engine -o engine*:shared=True --build=missing")
+run("conan build game -o engine*:shared=True ")
+run(r".\game\build\generators\conanrun.bat && .\game\build\Release\game.exe")
+
 run("conan build game")
 run(r".\game\build\Release\game.exe")
 
