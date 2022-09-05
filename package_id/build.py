@@ -21,11 +21,14 @@ def chdir(d):
     os.chdir(cwd)
 
 
-run("conan create math --build=missing")
+run("conan remove * -f")
+run("conan create math --version=1.0 --build=missing")
 run("conan create engine --build=missing")
 run("conan create engine -o engine*:shared=True --build=missing")
-run("conan build game -o engine*:shared=True ")
-run(r".\game\build\generators\conanrun.bat && .\game\build\Release\game.exe")
+run("conan create game -o engine*:shared=True --build=missing")
+run("conan create game --build=missing")
 
-run("conan build game")
-run(r".\game\build\Release\game.exe")
+# do a change in math, bump patch
+run("conan create math --version=1.0.1 --build=missing")
+run("conan graph build-order --requires=game/1.0 -o engine*:shared=True --build=missing")
+run("conan graph build-order --requires=game/1.0 --build=missing")
