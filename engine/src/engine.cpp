@@ -9,8 +9,8 @@
 void engine(){
     math();
     #ifdef NDEBUG
-    std::cout << "engine/" << STRINGIFYMACRO(PKG_VERSION)  << "Hello World Release!\n";
+    std::cout << "engine/" << STRINGIFYMACRO(PKG_VERSION)  << ": Hello World Release!\n";
     #else
-    std::cout << "engine/" << STRINGIFYMACRO(PKG_VERSION)  << "Hello World Debug!\n";
+    std::cout << "engine/" << STRINGIFYMACRO(PKG_VERSION)  << ": Hello World Debug!\n";
     #endif
 }
