@@ -22,6 +22,7 @@ def chdir(d):
 
 
 # Preparation
+run("git clean -xdf")
 run("conan remove math/1.1* -f")
 run("conan remove engine/1.1* -f")
 run("conan create math --version=1.0 --build=missing")
@@ -66,7 +67,7 @@ run("conan install game --lockfile=game.lock")  # All good, still 1.0
 # create a new version of engine, modifying lockfile
 run("conan create engine --version=1.1 --lockfile=game.lock --lockfile-out=new_engine.lock")
 print(load("new_engine.lock"))
-run("conan install game --lockfile=new_engine.lock")
+run("conan create game --lockfile=new_engine.lock")
 
 
 ###### COMMANDS #######################################################
