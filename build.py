@@ -23,20 +23,20 @@ def chdir(d):
 
 # Preparation
 run("git clean -xdf")
-run("conan remove math/1.1* -f")
-run("conan remove engine/1.1* -f")
+run("conan remove * -f")
 run("conan create math --version=1.0 --build=missing")
 run("conan create engine --version=1.0 --build=missing")
 run("conan create engine --version=1.0 -o engine*:shared=True --build=missing")
 run("conan create game --build=missing")
 run("conan create game -o engine*:shared=True --build=missing")
-
+exit()
 
 ###### GRAPH  #######################################################
-run("conan install game -o engine*:shared=True")
-# Show here that no math find is necessary
-run("conan install game")
-# Now show that math is there, but only the library, not the headers
+with chdir("game"):
+    run("conan install . -o engine*:shared=True")
+    # Show here that no math find is necessary
+    run("conan install .")
+    # Now show that math is there, but only the library, not the headers
 
 
 ###### PACKAGE-ID #######################################################
