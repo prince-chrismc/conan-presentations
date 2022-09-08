@@ -12,7 +12,7 @@ class gameRecipe(ConanFile):
     # Binary configuration
     settings = "os", "compiler", "build_type", "arch"
 
-    requires = "engine/1.0"
+    requires = "engine/[>=1.0 <2.0]"
     generators = "CMakeDeps", "CMakeToolchain"
 
     # Sources are located in the same place as this recipe, copy them to the recipe
