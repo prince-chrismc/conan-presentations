@@ -24,6 +24,7 @@ def chdir(d):
 # Preparation
 run("conan remove game* -f")
 run("conan remove math/1.1* -f")
+run("conan remove engine/1.1* -f")
 run("conan create math --version=1.0 --build=missing")
 run("conan create engine --version=1.0 --build=missing")
 run("conan create engine --version=1.0 -o engine*:shared=True --build=missing")
