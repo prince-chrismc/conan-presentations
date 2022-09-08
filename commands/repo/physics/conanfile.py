@@ -1,5 +1,5 @@
 from conan import ConanFile
 
-class MyMath(ConanFile):
-    name = "math"
+class Physics(ConanFile):
+    name = "physics"
     version = "0.1"

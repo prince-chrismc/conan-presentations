@@ -1,3 +1,5 @@
+import os
+
 from conan import ConanFile
 from conan.tools.cmake import CMake, cmake_layout
 
@@ -23,6 +25,8 @@ class gameRecipe(ConanFile):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
+        game = os.path.join(self.cpp.build.bindir, "game.exe")
+        self.run(game, env="conanrun")
 
     def package(self):
         cmake = CMake(self)

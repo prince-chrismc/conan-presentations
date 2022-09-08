@@ -11,7 +11,7 @@ class engineRecipe(ConanFile):
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
 
-    requires = "math/1.0"
+    requires = "math/[>=1.0 <2.0]"
     generators = "CMakeDeps", "CMakeToolchain"
     # Sources are located in the same place as this recipe, copy them to the recipe
     exports_sources = "CMakeLists.txt", "src/*", "include/*"

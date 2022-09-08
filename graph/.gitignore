@@ -1,4 +1,0 @@
-*.bat
-*.sh
-*.lock
-*/CMakeUserPresets.json

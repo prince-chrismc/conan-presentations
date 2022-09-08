@@ -4,7 +4,6 @@ from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout
 
 class mathRecipe(ConanFile):
     name = "math"
-    version = "1.0"
 
     # Binary configuration
     settings = "os", "compiler", "build_type", "arch"
@@ -23,6 +22,7 @@ class mathRecipe(ConanFile):
 
     def generate(self):
         tc = CMakeToolchain(self)
+        tc.preprocessor_definitions["PKG_VERSION"] = str(self.version)
         tc.generate()
 
     def build(self):

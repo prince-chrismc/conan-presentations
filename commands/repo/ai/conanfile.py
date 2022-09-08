@@ -1,5 +1,5 @@
 from conan import ConanFile
 
-class Engine(ConanFile):
-    name = "engine"
+class AI(ConanFile):
+    name = "ai"
     version = "0.1"
