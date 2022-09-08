@@ -23,10 +23,12 @@ def chdir(d):
 
 # Preparation
 run("conan remove game* -f")
+run("conan remove math/1.1* -f")
 run("conan create math --version=1.0 --build=missing")
 run("conan create engine --version=1.0 --build=missing")
-run("conan create engine -o engine*:shared=True --build=missing")
-
+run("conan create engine --version=1.0 -o engine*:shared=True --build=missing")
+run("conan create game --build=missing")
+run("conan create game -o engine*:shared=True --build=missing")
 
 ###### GRAPH  #######################################################
 run("conan install game -o engine*:shared=True")
@@ -57,7 +59,7 @@ run("conan install game --lockfile-out=game.lock")
 print(load("game.lock"))
 
 run("conan create math --version=1.1")
-run("conan install game") 
+run("conan install game", error=True) # missing binary
 run("conan install game --lockfile=game.lock")  # All good, still 1.0
 
 # create a new version of engine, modifying lockfile
