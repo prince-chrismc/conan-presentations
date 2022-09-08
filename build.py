@@ -45,11 +45,12 @@ run("conan create game -o engine*:shared=True --build=missing")
 
 
 ###### DEPLOY #######################################################
-run("conan install game --deploy=full_deploy -of=full_deploy")
-run("conan install game --deploy=full_deploy -of=full_deploy -g CMakeDeps")
+with chdir("game"):
+    run("conan install . --deploy=full_deploy")
+    run("conan install . --deploy=full_deploy  -g CMakeDeps")
 
 # Custom one:
-run("conan install --requires=game/1.0 -o engine*:shared=True --deploy=runtime_zip_deploy -of=runtime_deploy")
+run("conan install --requires=game/1.0 -o engine*:shared=True --deploy=runtime_zip_deploy")
 
 
 raise

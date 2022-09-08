@@ -134,3 +134,5 @@ dmypy.json
 */CMakeUserPresets.json
 full_deploy
 runtime_deploy
+*.zip
+host
