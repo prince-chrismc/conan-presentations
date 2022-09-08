@@ -132,3 +132,5 @@ dmypy.json
 *.sh
 *.lock
 */CMakeUserPresets.json
+full_deploy
+runtime_deploy
