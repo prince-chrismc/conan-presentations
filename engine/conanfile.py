@@ -4,7 +4,6 @@ from conan.tools.cmake import CMake, cmake_layout
 
 class engineRecipe(ConanFile):
     name = "engine"
-    version = "1.0"
 
     # Binary configuration
     settings = "os", "compiler", "build_type", "arch"
