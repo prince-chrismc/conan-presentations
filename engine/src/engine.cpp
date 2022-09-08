@@ -2,11 +2,15 @@
 #include "engine.h"
 #include "mymath.h"
 
+#define STRINGIFY(x) #x
+#define STRINGIFYMACRO(y) STRINGIFY(y)
+
+
 void engine(){
     math();
     #ifdef NDEBUG
-    std::cout << "engine/1.0: Hello World Release!\n";
+    std::cout << "engine/" << STRINGIFYMACRO(PKG_VERSION)  << "Hello World Release!\n";
     #else
-    std::cout << "engine/1.0: Hello World Debug!\n";
+    std::cout << "engine/" << STRINGIFYMACRO(PKG_VERSION)  << "Hello World Debug!\n";
     #endif
 }

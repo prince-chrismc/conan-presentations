@@ -1,5 +1,5 @@
 from conan import ConanFile
-from conan.tools.cmake import CMake, cmake_layout
+from conan.tools.cmake import CMake, cmake_layout, CMakeToolchain
 
 
 class engineRecipe(ConanFile):
@@ -11,7 +11,7 @@ class engineRecipe(ConanFile):
     default_options = {"shared": False, "fPIC": True}
 
     requires = "math/[>=1.0 <2.0]"
-    generators = "CMakeDeps", "CMakeToolchain"
+    generators = "CMakeDeps"
     # Sources are located in the same place as this recipe, copy them to the recipe
     exports_sources = "CMakeLists.txt", "src/*", "include/*"
 
@@ -21,6 +21,11 @@ class engineRecipe(ConanFile):
 
     def layout(self):
         cmake_layout(self)
+
+    def generate(self):
+        tc = CMakeToolchain(self)
+        tc.preprocessor_definitions["PKG_VERSION"] = str(self.version)
+        tc.generate()
 
     def build(self):
         cmake = CMake(self)
