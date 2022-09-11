@@ -42,8 +42,8 @@ with chdir("game"):
 ###### PACKAGE-ID #######################################################
 # do a change in math, bump patch
 run("conan create math --version=1.0.1")
-run("conan graph build-order --requires=game/1.0 -o engine*:shared=True --build=missing")
 run("conan graph build-order --requires=game/1.0 --build=missing")
+run("conan graph build-order --requires=game/1.0 -o engine*:shared=True --build=missing")
 run("conan remove math/1.0.1* -f")
 
 
@@ -61,7 +61,6 @@ run("conan install game --lockfile-out=game.lock")
 print(load("game.lock"))
 
 run("conan create math --version=1.1")
-run("conan install game", error=True) # missing binary
 run("conan install game --lockfile=game.lock")  # All good, still 1.0
 
 # create a new version of engine, modifying lockfile
