@@ -72,7 +72,7 @@ run("conan create game --lockfile=new_engine.lock")
 
 ###### COMMANDS #######################################################
 with chdir("commands"):
-    run("conan config install config")
+    run("conan config install myconfig")
 
     run("conan -h")
     run("conan jfrog:hello")
