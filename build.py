@@ -23,12 +23,15 @@ def chdir(d):
 
 # Preparation
 run("git clean -xdf")
-run("conan remove * -f")
+run("conan remove '*' -f")
+run("conan profile detect --name default")
+
+# Build some versions to fill cache
 run("conan create math --version=1.0 --build=missing")
 run("conan create engine --version=1.0 --build=missing")
-run("conan create engine --version=1.0 -o engine*:shared=True --build=missing")
+run("conan create engine --version=1.0 -o 'engine*:shared=True' --build=missing")
 run("conan create game --build=missing")
-run("conan create game -o engine*:shared=True --build=missing")
+run("conan create game -o 'engine*:shared=True' --build=missing")
 exit()
 
 ###### GRAPH  #######################################################
