@@ -34,6 +34,12 @@ run("conan create game --build=missing")
 run("conan create game -o 'engine*:shared=True' --build=missing")
 exit()
 
+###### PACKAGE-SIGNING  #################################################
+with chdir("package_signing"):
+    # run("conan remote add superfrog ...")
+    # run("conan remote login -p $JFROG_PWD superfrog $JFROG_USER")
+    run("conan upload '*' -r superfrog -c")
+
 ###### GRAPH  #######################################################
 with chdir("game"):
     run("conan install . -o engine*:shared=True")
