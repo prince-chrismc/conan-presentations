@@ -25,7 +25,7 @@ class gameRecipe(ConanFile):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
-        game = os.path.join(self.cpp.build.bindir, "game.exe")
+        game = os.path.join(self.cpp.build.bindir[0], "game")
         self.run(game, env="conanrun")
 
     def package(self):
