@@ -34,12 +34,6 @@ run("conan create game --build=missing")
 run("conan create game -o 'engine*:shared=True' --build=missing")
 exit()
 
-###### PACKAGE-SIGNING  #################################################
-with chdir("package_signing"):
-    # run("conan remote add superfrog ...")
-    # run("conan remote login -p $JFROG_PWD superfrog $JFROG_USER")
-    run("conan upload '*' -r superfrog -c")
-
 ###### GRAPH  #######################################################
 with chdir("game"):
     run("conan install . -o engine*:shared=True")
@@ -47,6 +41,15 @@ with chdir("game"):
     run("conan install .")
     # Now show that math is there, but only the library, not the headers
 
+###### PACKAGE-SIGNING  #################################################
+with chdir("package_signing"):
+    # run("conan remote add superfrog ...")
+    # run("conan remote login -p $JFROG_PWD superfrog $JFROG_USER")
+    run("conan config install .conan")
+    # let's assume we have some packages from above
+    run("conan upload '*' -r superfrog -c") # This will sign
+    run("conan remove '*' -f")
+run("conan create game --build=missing") # This will verify
 
 ###### PACKAGE-ID #######################################################
 # do a change in math, bump patch
