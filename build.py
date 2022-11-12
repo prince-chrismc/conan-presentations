@@ -65,7 +65,8 @@ with chdir("game"):
     run("conan install . --deploy=full_deploy  -g CMakeDeps")
 
 # Custom one:
-run("conan install --requires=game/1.0 -o engine*:shared=True --deploy=runtime_zip_deploy")
+run("conan config install deployers/.conan")
+run("conan install --requires=game/1.0 -o 'engine*:shared=True' --deploy=runtime_zip_deploy")
 
 
 ###### LOCKFILES #######################################################
