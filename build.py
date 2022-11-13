@@ -51,6 +51,13 @@ with chdir("package_signing"):
     run("conan remove '*' -f")
 run("conan create game --build=missing") # This will verify
 
+###### COMPATIBILITY ####################################################
+run("conan profile show -pr default")
+# Let's build everything
+run("conan create math --version 1.0 --build=missing")
+run("conan create engine --version 1.0 --build=missing")
+run("conan create game -s compiler.cppstd=14")
+
 ###### PACKAGE-ID #######################################################
 # do a change in math, bump patch
 run("conan create math --version=1.0.1")
