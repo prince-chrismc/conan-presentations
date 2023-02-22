@@ -23,7 +23,7 @@ def chdir(d):
 
 # Preparation
 run("git clean -xdf")
-run("conan remove '*' -f")
+run("conan remove '*' -c")
 run("conan profile detect --name default")
 
 # Build some versions to fill cache
@@ -36,8 +36,10 @@ exit()
 
 ###### GRAPH  #######################################################
 with chdir("game"):
-    run("conan install . -o engine*:shared=True")
+    run("conan install . -o 'engine*:shared=True'")
     # Show here that no math find is necessary
+    # - CLI will say skipped
+    # - VS code, find in folder --> search for math
     run("conan install .")
     # Now show that math is there, but only the library, not the headers
 
@@ -48,14 +50,18 @@ with chdir("package_signing"):
     run("conan config install .conan")
     # let's assume we have some packages from above
     run("conan upload '*' -r superfrog -c") # This will sign
-    run("conan remove '*' -f")
+    run("conan remove '*' -c")
 run("conan create game --build=missing") # This will verify
 
 ###### COMPATIBILITY ####################################################
+# Inspect the default profile, should be use cppstd=98
 run("conan profile show -pr default")
+
 # Let's build everything
 run("conan create math --version 1.0 --build=missing")
 run("conan create engine --version 1.0 --build=missing")
+
+# Now it should search for different package_ids 
 run("conan create game -s compiler.cppstd=14")
 
 ###### PACKAGE-ID #######################################################
@@ -63,7 +69,7 @@ run("conan create game -s compiler.cppstd=14")
 run("conan create math --version=1.0.1")
 run("conan graph build-order --requires=game/1.0 --build=missing")
 run("conan graph build-order --requires=game/1.0 -o engine*:shared=True --build=missing")
-run("conan remove math/1.0.1* -f")
+run("conan remove math/1.0.1* -c")
 
 
 ###### DEPLOY #######################################################
@@ -77,9 +83,14 @@ run("conan install --requires=game/1.0 -o 'engine*:shared=True' --deploy=runtime
 
 
 ###### LOCKFILES #######################################################
+# This is for demo purposes, that we are putting ``game.lock`` otherwise it
+#is conan.lock by default
 run("conan install game --lockfile-out=game.lock")
+
+# Run cat locally
 print(load("game.lock"))
 
+# Lets add a version
 run("conan create math --version=1.1")
 run("conan install game --lockfile=game.lock")  # All good, still 1.0
 
